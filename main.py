@@ -1,9 +1,14 @@
 import lichess.api
 from lichess.format import SINGLE_PGN
+from openpyxl import load_workbook
 
-pl = "mawyien"
-max = 200
+""" wb = load_workbook(filename = 'players.xlsx') """
 
-pgn = lichess.api.user_games(pl, max=max, format=SINGLE_PGN)
-with open('last200.pgn', 'w') as f:
-  f.write(pgn)
+""" sheet_ranges = wb['Tabelle1'] """
+
+players = ["mawyien"]
+
+for player in players:
+  pgn = lichess.api.user_games(player, format=SINGLE_PGN)
+  with open('games/' + player + '.pgn', 'w') as f:
+    f.write(pgn)
